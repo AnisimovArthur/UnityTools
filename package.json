@@ -1,0 +1,18 @@
+{
+    "name": "com.archie.unitytools",
+    "version": "0.0.2",
+    "displayName": "Unity Tools",
+    "description": "Unity Tools",
+    "unity": "2018.1",
+    "dependencies": {
+    },
+    "keywords": [
+        "Tools",
+        "Editor",
+        "Unity Tools"
+    ],
+    "author": {
+        "name": "Arthur Anisimov",
+        "email": "anisimov.arthur@gmail.com"
+    }
+}
