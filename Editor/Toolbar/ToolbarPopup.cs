@@ -2,7 +2,7 @@
 
 using UnityEditor;
 
-namespace UnityTools
+namespace UnityTools.Editor
 {
     /// <summary>
     /// Toolbar popup with a generic menu.

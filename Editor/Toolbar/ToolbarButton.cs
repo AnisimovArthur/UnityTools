@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 using UnityEditor;
 
-namespace UnityTools
+namespace UnityTools.Editor
 {
     /// <summary>
     /// Button for toolbar.

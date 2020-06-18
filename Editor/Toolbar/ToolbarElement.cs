@@ -1,6 +1,6 @@
 ﻿using UnityEngine.Events;
 
-namespace UnityTools
+namespace UnityTools.Editor
 {
     /// <summary>
     /// Base toolbar element.

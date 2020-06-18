@@ -10,7 +10,7 @@ using UnityEngine.UIElements;
 using UnityEngine.Experimental.UIElements;
 #endif
 
-namespace UnityTools
+namespace UnityTools.Editor
 {
     /// <summary>
     /// The side of a tool.

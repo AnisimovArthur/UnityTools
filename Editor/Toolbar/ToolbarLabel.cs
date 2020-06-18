@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace UnityTools
+namespace UnityTools.Editor
 {
     /// <summary>
     /// Label for toolbar.
