@@ -22,6 +22,7 @@ This is the Unity package with Editor and Runtime tools.
       * [Toolbar Button](#et-toolbar-button)
       * [Toolbar Popup](#et-toolbar-popup)
       * [Toolbar Label](#et-toolbar-label)
+   * [Inspector Button](#et-inspectorbutton)
    
 # Getting Started
 ## <a id="gs-install"></a>Install package
@@ -114,7 +115,7 @@ static ToolbarExample()
 }
 ```
 
-# <a id="qs-inspectorbutton"></a>Inspector Button
+# <a id="et-inspectorbutton"></a>Inspector Button
 
 ```csharp
 using UnityEngine;
