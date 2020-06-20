@@ -10,10 +10,11 @@ This is the Unity package with Editor and Runtime tools.
 * [Update](#gs-update)
 
 ### Runtime Tools
+   * [Scheduler](#rt-scheduler)
    * Extensions
      * UI Extensions
-     * Transform (RectTransform) Extensions
-   * [Utils](#rt-utils)
+     * Transform (RectTransform) Extensions   
+   * [Utils](#rt-utils)      
       * [Patterns](#rt-utils-patterns)
           * [Singleton](#rt-utils-patterns-singleton)
 
@@ -44,6 +45,34 @@ Old: ```#v0.0.2-preview```
 New: ```#v0.1.1-preview```
 
 # Runtime Tools
+## <a id="rt-scheduler"></a>Scheduler
+Tool for delayed event execution.
+
+```csharp
+using UnityEngine;
+using UnityTools;
+
+public class SchedulerExample : MonoBehaviour
+{
+    private void Awake()
+    {
+        // Debug.Log should happens in 2 seconds.
+        var scheduled = Scheduler.Schedule(2.0f, () => Debug.Log("Hello World!"));
+
+        // First option to cancel Debug.Log("Hello World!") above
+        scheduled.Cancel();
+
+        // Second option to cancel Debug.Log("Hello World!") above
+        // Scheduler.Cancel(scheduled);
+
+        // As a result, you will see only "I'm a cat." in the console because "scheduled" was canceled above
+        Scheduler.Schedule(0.5f, delegate
+        {
+            Debug.Log("I'm a cat.");
+        });
+    }
+}
+```
 
 ## <a id="rt-utils"></a>Utils
 ### <a id="rt-utils-patterns"></a>Patterns
