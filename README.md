@@ -163,10 +163,10 @@ public class Example : MonoBehaviour
     private const string ExampleString = "Example string";
 
 #if UNITY_EDITOR
-    [Button("Do Log exampleString")]
+    [Button("Do Log ExampleString")]
     private void DoSomething()
     {
-        Debug.Log(exampleString);
+        Debug.Log(ExampleString);
     }
 #endif
 }
