@@ -11,7 +11,7 @@ namespace UnityTools
     public class Scheduler : Singleton<Scheduler>
     {
         private static List<ScheduledEvent> ScheduledEvents { get; set; } = new List<ScheduledEvent>();
-        private static int ScheduledEventsCount = 0;
+        private static int ScheduledEventsCount { get; set; } = 0;
 
         /// <summary>
         /// Schedule a new event to occur after the specified delay.
