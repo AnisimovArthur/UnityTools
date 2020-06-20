@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEditor;
 
 namespace UnityTools.Editor
 {
@@ -7,7 +8,7 @@ namespace UnityTools.Editor
     /// </summary>
     public class ToolbarLabel : ToolbarElement
     {
-        public ToolbarLabel(string title = "Label", Texture icon = null) : base(title, icon, null) { }
+        public ToolbarLabel(string title = "Label") : base(title, null, null) { }
 
         public override void OnGUI()
         {
