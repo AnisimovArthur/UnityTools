@@ -10,11 +10,13 @@ namespace UnityTools.Editor
     /// </summary>
     public class ToolbarButton : ToolbarElement
     {
-        public ToolbarButton(string title = "Button", UnityAction clickAction = null) : base(title, clickAction) { }
+        public ToolbarButton(string title = "Button", Texture icon = null, UnityAction clickAction = null) : base(title, icon, clickAction) { }
 
         public override void OnGUI()
         {
-            if (GUILayout.Button(Title, EditorStyles.toolbarButton))
+            var content = new GUIContent(Title, Icon);
+
+            if (GUILayout.Button(content, EditorStyles.toolbarButton))
             {
                 ClickAction?.Invoke();
             }

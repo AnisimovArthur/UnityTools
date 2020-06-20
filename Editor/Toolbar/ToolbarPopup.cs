@@ -9,16 +9,18 @@ namespace UnityTools.Editor
     /// </summary>
     public class ToolbaPopup : ToolbarElement
     {
-        private GenericMenu Menu { get; set; }
+        public GenericMenu Menu { get; set; }
 
-        public ToolbaPopup(GenericMenu menu, string title = "Popup") : base(title, null)
+        public ToolbaPopup(GenericMenu menu, string title = "Popup", Texture icon = null) : base(title, icon, null)
         {
             Menu = menu;
         }
 
         public override void OnGUI()
         {
-            if (GUILayout.Button(Title, EditorStyles.toolbarPopup))
+            var content = new GUIContent(Title, Icon);
+
+            if (GUILayout.Button(content, EditorStyles.toolbarPopup))
             {
                 Menu.ShowAsContext();
             }

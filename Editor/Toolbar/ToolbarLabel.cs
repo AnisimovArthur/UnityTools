@@ -7,11 +7,13 @@ namespace UnityTools.Editor
     /// </summary>
     public class ToolbarLabel : ToolbarElement
     {
-        public ToolbarLabel(string title = "Label") : base(title, null) { }
+        public ToolbarLabel(string title = "Label", Texture icon = null) : base(title, icon, null) { }
 
         public override void OnGUI()
         {
-            GUILayout.Label(Title);
+            var content = new GUIContent(Title, Icon);
+
+            GUILayout.Label(content);
         }
     }
 }
