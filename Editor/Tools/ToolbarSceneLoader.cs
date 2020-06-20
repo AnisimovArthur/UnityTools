@@ -17,6 +17,9 @@ namespace UnityTools.Editor
         /// <param name="path"></param>
         public static void AddScene(string name, string path)
         {
+            if (Tool == null)
+                CreateTool();
+
             Tool.Menu.AddItem(new GUIContent(name), false, () => OpenScene(path));
         }
 
@@ -26,16 +29,24 @@ namespace UnityTools.Editor
         /// <param name="name"></param>
         public static void AddSeparator(string name)
         {
+            if (Tool == null)
+                CreateTool();
+
             Tool.Menu.AddSeparator(name);
         }
 
-        static ToolbarSceneLoader()
+        private static void CreateTool()
         {
             var menu = new GenericMenu();
             var icon = Resources.Load<Texture>($"{EditorResources.IconsPath}/ToolbarSceneLoader");
             Tool = new ToolbaPopup(menu, "Scenes", icon);
 
             ToolbarTools.AddTool(Tool, ToolbarSide.Right);
+        }
+
+        static ToolbarSceneLoader()
+        {
+            Tool = null;
         }
 
         private static void OpenScene(string path)
