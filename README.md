@@ -83,14 +83,10 @@ public class ToolbarExample
 
 ###  <a id="et-toolbar-button"></a>Toolbar Button
 
-You can provide a tool icon as shown below.
-
 ```csharp
 static ToolbarExample()
 {
-    var icon = EditorGUIUtility.FindTexture("GameManager Icon");
-    var buttonWithIcon = new ToolbarButton("Button", icon, PrintMessage);
-    ToolbarTools.AddTool(buttonWithIcon, ToolbarSide.Left);
+    ToolbarTools.AddTool(new ToolbarButton("Button", PrintMessage), ToolbarSide.Left);
 }
 
 private static void PrintMessage()
@@ -120,6 +116,18 @@ static ToolbarExample()
     ToolbarTools.AddTool(new ToolbarLabel("My Label"), ToolbarSide.Left);
 }
 ```
+
+#### Icon for toolbar items
+You can provide a tool icon as shown below.
+
+```csharp
+static ToolbarExample()
+{
+    var icon = Resources.Load<Texture>($"YOUR_PATH_TO_ICON");
+    ToolbarTools.AddTool(new ToolbarButton("Button", icon), ToolbarSide.Left);
+}
+```
+
 # <a id="et-toolbarsceneloader"></a>Toolbar Scene Loader
 
 This tool is developed by [Toolbar](#et-toolbar) functionality. You can easily add quick access to your scenes.
