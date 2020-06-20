@@ -6,7 +6,7 @@ using UnityEngine;
 namespace UnityTools
 {
     /// <summary>
-    /// Tool for delayed event executionю
+    /// Tool for delayed event execution.
     /// </summary>
     public class Scheduler : Singleton<Scheduler>
     {
