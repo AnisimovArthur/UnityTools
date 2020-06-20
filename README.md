@@ -160,7 +160,7 @@ using UnityTools.Editor;
 
 public class Example : MonoBehaviour
 {
-    private const string exampleString = "Example string";
+    private const string ExampleString = "Example string";
 
 #if UNITY_EDITOR
     [Button("Do Log exampleString")]
