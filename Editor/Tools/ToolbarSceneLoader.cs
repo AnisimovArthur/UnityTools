@@ -6,7 +6,7 @@ using UnityEditor;
 namespace UnityTools.Editor
 {
     [InitializeOnLoad]
-    public static class ToolbarSceneLoaderTool
+    public static class ToolbarSceneLoader
     {
         private static ToolbaPopup Tool { get; set; }
 
@@ -29,7 +29,7 @@ namespace UnityTools.Editor
             Tool.Menu.AddSeparator(name);
         }
 
-        static ToolbarSceneLoaderTool()
+        static ToolbarSceneLoader()
         {
             var menu = new GenericMenu();
             var icon = Resources.Load<Texture>($"{EditorResources.IconsPath}/ToolbarSceneLoader");
