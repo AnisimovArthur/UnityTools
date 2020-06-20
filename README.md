@@ -22,6 +22,7 @@ This is the Unity package with Editor and Runtime tools.
       * [Toolbar Button](#et-toolbar-button)
       * [Toolbar Popup](#et-toolbar-popup)
       * [Toolbar Label](#et-toolbar-label)
+   * [Toolbar Scene Loader](#et-toolbarsceneloader)
    * [Inspector Button](#et-inspectorbutton)
    
 # Getting Started
@@ -81,10 +82,15 @@ public class ToolbarExample
 <img src="https://i.imgur.com/NZ54FqH.png" alt="alt text" width="478" height="82">
 
 ###  <a id="et-toolbar-button"></a>Toolbar Button
+
+You can provide a tool icon as shown below.
+
 ```csharp
 static ToolbarExample()
 {
-    ToolbarTools.AddTool(new ToolbarButton("My Button", PrintMessage), ToolbarSide.Right);
+    var icon = EditorGUIUtility.FindTexture("GameManager Icon");
+    var buttonWithIcon = new ToolbarButton("Button", icon, PrintMessage);
+    ToolbarTools.AddTool(buttonWithIcon, ToolbarSide.Left);
 }
 
 private static void PrintMessage()
@@ -112,6 +118,28 @@ private static void LoadSceneByName(string name)
 static ToolbarExample()
 {
     ToolbarTools.AddTool(new ToolbarLabel("My Label"), ToolbarSide.Left);
+}
+```
+# <a id="et-toolbarsceneloader"></a>Toolbar Scene Loader
+
+This tool is developed by [Toolbar](#et-toolbar) functionality. You can easily add quick access to your scenes.
+
+<img src="https://i.imgur.com/TtWOWmH.png" alt="alt text" width="451" height="155">
+
+```csharp
+using UnityEditor;
+
+using UnityTools.Editor;
+
+[InitializeOnLoad]
+public static class ToolbarLoaderToolExample
+{
+    static ToolbarLoaderToolExample()
+    {
+        ToolbarSceneLoader.AddScene("Scene 1", "Content/Scenes/1.unity");
+        ToolbarSceneLoader.AddSeparator("Other Scenes");
+        ToolbarSceneLoader.AddScene("Test Scenes/Test Scene 1", "Content/Scenes/Test/Test 1");
+    }
 }
 ```
 
