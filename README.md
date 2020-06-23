@@ -6,7 +6,8 @@ This is the Unity package with Editor and Runtime tools.
 # Table of contents
 
 ### Getting started
-* [Install](#gs-install)
+* [Install (Package Manager)](#gs-install-pm)
+* [Install (Manifest)](#gs-install-manifest)
 * [Update](#gs-update)
 
 ### Runtime Tools
@@ -28,14 +29,25 @@ This is the Unity package with Editor and Runtime tools.
    * [Inspector Button](#et-inspectorbutton)
    
 # Getting Started
-## <a id="gs-install"></a>Install package
+
+**Note:** If you use [**Assembly Definitions**](https://docs.unity3d.com/Manual/ScriptCompilationAssemblyDefinitionFiles.html) you have to add references to your Assembly Definition. 
+Add ```Archie.UnityTools.Editor.asmdef``` in order to use Editor Tools.
+Add ```Archie.UnityTools.Runtime.asmdef``` in order to use Runtime Tools.
+
+## <a id="gs-install-pm"></a>Install package via Package Manager
+You can add the package dependency via Unity's Package Manager .
+1. Open Package Manager: Window -> Package Manager.
+2. From the top left, click on the "+" button.
+3. Input ```https://github.com/AnisimovArthur/UnityTools``` in the input field.
+4. Click Add.
+
+## <a id="gs-install-manifest"></a>Install package via Manifest
+The second option is to install via the manifest.
+
 To use the package you have to add the dependency to the project's Packages/manifest.json file.
 ```json
 "com.archie.unitytools": "https://github.com/AnisimovArthur/UnityTools.git#v0.2.0-preview",
 ```
-**Note:** If you use [**Assembly Definitions**](https://docs.unity3d.com/Manual/ScriptCompilationAssemblyDefinitionFiles.html) you have to add references to your Assembly Definition. 
-Add ```Archie.UnityTools.Editor.asmdef``` in order to use Editor Tools.
-Add ```Archie.UnityTools.Runtime.asmdef``` in order to use Runtime Tools.
 
 ## <a id="gs-update"></a>Update package
 To update the package you have to update the dependency version in the project's Packages/manifest.json file.
