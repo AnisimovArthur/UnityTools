@@ -31,7 +31,7 @@ This is the Unity package with Editor and Runtime tools.
 ## <a id="gs-install"></a>Install package
 To use the package you have to add the dependency to the project's Packages/manifest.json file.
 ```json
-"com.archie.unitytools": "https://github.com/AnisimovArthur/UnityTools.git#v0.1.1-preview",
+"com.archie.unitytools": "https://github.com/AnisimovArthur/UnityTools.git#v0.2.0-preview",
 ```
 **Note:** If you use [**Assembly Definitions**](https://docs.unity3d.com/Manual/ScriptCompilationAssemblyDefinitionFiles.html) you have to add references to your Assembly Definition. 
 Add ```Archie.UnityTools.Editor.asmdef``` in order to use Editor Tools.
@@ -229,7 +229,9 @@ public static class ToolbarLoaderToolExample
 ```csharp
 using UnityEngine;
 
+#if UNITY_EDITOR
 using UnityTools.Editor;
+#endif
 
 public class Example : MonoBehaviour
 {
