@@ -11,6 +11,7 @@ This is the Unity package with Editor and Runtime tools.
 
 ### Runtime Tools
    * [Scheduler](#rt-scheduler)
+   * [Event Handler](#rt-eventhandler)
    * Extensions
      * UI Extensions
      * Transform (RectTransform) Extensions   
@@ -73,6 +74,49 @@ public class SchedulerExample : MonoBehaviour
     }
 }
 ```
+
+## <a id="rt-eventhandler"></a>Event Handler
+
+Generic Event System.
+The Event System allows components to Subscribe, Unsubscribe, and Execute events.
+
+```csharp
+using UnityEngine;
+using UnityTools;
+
+public class FirstComponent : MonoBehaviour
+{
+    private void Awake()
+    {
+        EventHandler.Subscribe<string, GameObject>("FirstEvent", PrintMessage);
+        EventHandler.Subscribe("FirstEvent", PrintHello);
+        EventHandler.Subscribe("SecondEvent", PrintHello);
+
+        EventHandler.Unsubscribe("SecondEvent", PrintHello);
+
+        EventHandler.Execute("FirstEvent", Time.time.ToString(), gameObject);
+        EventHandler.Execute("FirstEvent");
+        EventHandler.Execute("SecondEvent");
+    }
+
+    private void PrintHello()
+    {
+        Debug.Log("Hello");
+    }
+
+    private void PrintMessage(string message, GameObject obj)
+    {
+        Debug.Log(message + " " + obj.name);
+    }
+}
+```
+As a result, you will see in the console
+
+1) 0 GameObject
+
+2) Hello
+
+You will not see "Hello" a second time because you are unsubscribing from this event in the code.
 
 ## <a id="rt-utils"></a>Utils
 ### <a id="rt-utils-patterns"></a>Patterns
