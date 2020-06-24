@@ -4,48 +4,30 @@ namespace UnityTools
 {
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
-        private static object _lock = new object();
-        private static T _instance;
+        private static object Lock { get; set; } = new object();
 
+        private static T instance;
         public static T Instance
         {
             get
             {
-                if (applicationIsQuitting)
+                lock (Lock)
                 {
-                    return null;
-                }
-
-                lock (_lock)
-                {
-                    if (_instance == null)
+                    if (instance == null)
                     {
-                        _instance = FindObjectOfType<T>();
+                        instance = FindObjectOfType<T>();
 
-                        if (_instance == null)
+                        if (instance == null)
                         {
                             var singleton = new GameObject("[S] " + typeof(T));
-                            _instance = singleton.AddComponent<T>();
+                            instance = singleton.AddComponent<T>();
                             DontDestroyOnLoad(singleton);
                         }
                     }
 
-                    return _instance;
+                    return instance;
                 }
             }
-        }
-
-        protected static bool applicationIsQuitting = false;
-
-        private void Awake()
-        {
-            applicationIsQuitting = false;
-        }
-
-        public void OnDestroy()
-        {
-            if (Instance == this)
-                applicationIsQuitting = true;
         }
     }
 }

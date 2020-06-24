@@ -79,6 +79,21 @@ namespace UnityTools
         {
             gameObject.name = "[UnityTools] Scheduler";
         }
+
+
+#if UNITY_2019_3_OR_NEWER
+        /// <summary>
+        /// Reset the static variables for domain reloading.
+        /// </summary>
+        [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
+        private static void DomainReset()
+        {
+            if (ScheduledEvents != null)
+                ScheduledEvents.Clear();
+
+            ScheduledEventsCount = 0;
+        }
+#endif
     }
 
     public class ScheduledEvent
