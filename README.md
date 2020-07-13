@@ -38,7 +38,7 @@ Add ```Archie.UnityTools.Runtime.asmdef``` in order to use Runtime Tools.
 You can add the package dependency via Unity's Package Manager .
 1. Open Package Manager: Window -> Package Manager.
 2. From the top left, click on the "+" button.
-3. Input ```https://github.com/AnisimovArthur/UnityTools``` in the input field.
+3. Input ```https://github.com/AnisimovArthur/UnityTools.git``` in the input field.
 4. Click Add.
 
 ## <a id="gs-install-manifest"></a>Install package via Manifest
