@@ -20,6 +20,19 @@ namespace UnityTools.Editor
     [InitializeOnLoad]
     public static class ToolbarTools
     {
+        private static readonly Type GuiViewType = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.GUIView");
+
+#if UNITY_2020_1_OR_NEWER
+        private static readonly Type IWindowBackendType = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.IWindowBackend");
+        private static readonly PropertyInfo WindowBackend = GuiViewType.GetProperty("windowBackend",
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        private static readonly PropertyInfo ViewVisualTree = IWindowBackendType.GetProperty("visualTree",
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+#else
+        private static readonly PropertyInfo ViewVisualTree = GuiViewType.GetProperty("visualTree",
+            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+#endif
+
         private static readonly List<ToolbarElement> LeftTools = new List<ToolbarElement>();
         private static readonly List<ToolbarElement> RightTools = new List<ToolbarElement>();
 
@@ -97,9 +110,18 @@ namespace UnityTools.Editor
 
             if (CurrentToolbar != null)
             {
-                // Get it's visual tree
-                var visualTree = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.GUIView").GetProperty("visualTree", BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
-                    .GetValue(CurrentToolbar, null) as VisualElement;
+                var toolbarType = typeof(UnityEditor.Editor).Assembly.GetType("UnityEditor.Toolbar");
+
+                // Get visual tree
+#if UNITY_2020_1_OR_NEWER
+                var windowBackend = WindowBackend.GetValue(CurrentToolbar);
+
+                var visualTree = (VisualElement)ViewVisualTree.GetValue(windowBackend, null);
+
+#else
+                var visualTree = (VisualElement)ViewVisualTree.GetValue(CurrentToolbar, null);
+
+#endif
 
                 // Get first child which 'happens' to be toolbar IMGUIContainer
                 var container = visualTree[0] as IMGUIContainer;
