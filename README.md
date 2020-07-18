@@ -1,5 +1,5 @@
 # Summary
-This is the Unity package with Editor and Runtime tools.
+Unity package with Editor and Runtime tools.
 
 **Note:** this package in preview version. Feel free to use Issues and Pull requests to contribute.
 
