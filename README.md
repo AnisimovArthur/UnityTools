@@ -101,13 +101,11 @@ public class FirstComponent : MonoBehaviour
     private void Awake()
     {
         EventHandler.Subscribe<string, GameObject>("FirstEvent", PrintMessage);
-        EventHandler.Subscribe("FirstEvent", PrintHello);
         EventHandler.Subscribe("SecondEvent", PrintHello);
 
         EventHandler.Unsubscribe("SecondEvent", PrintHello);
 
         EventHandler.Execute("FirstEvent", Time.time.ToString(), gameObject);
-        EventHandler.Execute("FirstEvent");
         EventHandler.Execute("SecondEvent");
     }
 
@@ -125,8 +123,6 @@ public class FirstComponent : MonoBehaviour
 As a result, you will see in the console
 
 1) 0 GameObject
-
-2) Hello
 
 You will not see "Hello" a second time because you are unsubscribing from this event in the code.
 
