@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 
 namespace UnityTools.Tests.Runtime
 {
@@ -31,7 +31,6 @@ namespace UnityTools.Tests.Runtime
             EventHandler.Execute(firstEventName, true);
             Assert.AreEqual(Result, false);
             EventHandler.Unsubscribe(firstEventName, Change);
-
         }
 
         private void Change(bool value)
