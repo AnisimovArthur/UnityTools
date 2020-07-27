@@ -8,8 +8,24 @@ namespace UnityTools
     /// <summary>
     /// Tool for delayed event execution.
     /// </summary>
-    public class Scheduler : Singleton<Scheduler>
+    public class Scheduler : MonoBehaviour
     {
+        private static Scheduler instance;
+        private static Scheduler Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    var singleton = new GameObject("[UnityTools] Scheduler").AddComponent<Scheduler>();
+                    instance = singleton;
+                    DontDestroyOnLoad(singleton);
+                }
+
+                return instance;
+            }
+        }
+
         private static List<ScheduledEvent> ScheduledEvents { get; set; } = new List<ScheduledEvent>();
         private static int ScheduledEventsCount { get; set; } = 0;
 
@@ -75,12 +91,6 @@ namespace UnityTools
             }
         }
 
-        private void Awake()
-        {
-            gameObject.name = "[UnityTools] Scheduler";
-        }
-
-
 #if UNITY_2019_3_OR_NEWER
         /// <summary>
         /// Reset the static variables for domain reloading.
@@ -91,6 +101,7 @@ namespace UnityTools
             if (ScheduledEvents != null)
                 ScheduledEvents.Clear();
 
+            instance = null;
             ScheduledEventsCount = 0;
         }
 #endif
