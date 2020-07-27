@@ -2,6 +2,11 @@ using UnityEngine;
 
 namespace UnityTools
 {
+    /// <summary>
+    /// Singleton pattern.
+    /// There is currently no compatibility with the new Enter Play Mode system.
+    /// </summary>
+    /// <typeparam name="T">Type of singleton.</typeparam>
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     {
         private static readonly object Lock = new object();
@@ -14,6 +19,9 @@ namespace UnityTools
             {
                 if (ApplicationIsQuitting)
                 {
+                    Debug.LogError("[S] '" + typeof(T) +
+                   "' destroyed. Returning null.");
+
                     return null;
                 }
 
@@ -25,8 +33,9 @@ namespace UnityTools
 
                         if (instance == null)
                         {
-                            var singleton = new GameObject("[S] " + typeof(T)).AddComponent<T>();
-                            DontDestroyOnLoad(singleton);
+                            var singletonObject = new GameObject("[S] " + typeof(T));
+                            instance = singletonObject.AddComponent<T>();
+                            DontDestroyOnLoad(singletonObject);
                         }
                     }
 
@@ -40,10 +49,14 @@ namespace UnityTools
             ApplicationIsQuitting = false;
         }
 
+        private void OnApplicationQuit()
+        {
+            ApplicationIsQuitting = true;
+        }
+
         public void OnDestroy()
         {
-            if (Instance == this)
-                ApplicationIsQuitting = true;
+            ApplicationIsQuitting = true;
         }
     }
 }
