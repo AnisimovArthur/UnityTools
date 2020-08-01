@@ -13,6 +13,7 @@ Unity package with Editor and Runtime tools.
 ### Runtime Tools
    * [Scheduler](#rt-scheduler)
    * [Event Handler](#rt-eventhandler)
+   * [ObjectPool](#rt-objectpool)
    * Extensions
      * UI Extensions
      * Transform (RectTransform) Extensions   
@@ -125,6 +126,30 @@ As a result, you will see in the console
 1) 0 GameObject
 
 You will not see "Hello" a second time because you are unsubscribing from this event in the code.
+
+## <a id="rt-objectpool"></a>ObjectPool
+Tool to use Pooled GameObjects.
+
+```csharp
+using System.Collections.Generic;
+using UnityEngine;
+using UnityTools;
+
+public class Example : MonoBehaviour
+{
+    [SerializeField] private GameObject prefab;
+
+    void Start()
+    {
+        var pooledObjects = new List<GameObject>();
+        for (int i = 0; i < 100; i++)
+            pooledObjects.Add(ObjectPool.Get(prefab));
+
+        for (int i = 0; i < 100; i++)
+            ObjectPool.Return(pooledObjects[i]);
+    }
+}
+```
 
 ## <a id="rt-utils"></a>Utils
 ### <a id="rt-utils-patterns"></a>Patterns
