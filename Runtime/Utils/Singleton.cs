@@ -19,9 +19,6 @@ namespace UnityTools
             {
                 if (ApplicationIsQuitting)
                 {
-                    Debug.LogError("[S] '" + typeof(T) +
-                   "' destroyed. Returning null.");
-
                     return null;
                 }
 
