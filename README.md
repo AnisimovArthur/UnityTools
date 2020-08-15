@@ -97,7 +97,7 @@ The Event System allows components to Subscribe, Unsubscribe, and Execute events
 using UnityEngine;
 using UnityTools;
 
-public class FirstComponent : MonoBehaviour
+public class ExampleComponent : MonoBehaviour
 {
     private void Awake()
     {
@@ -108,11 +108,19 @@ public class FirstComponent : MonoBehaviour
 
         EventHandler.Execute("FirstEvent", Time.time.ToString(), gameObject);
         EventHandler.Execute("SecondEvent");
+
+        EventHandler.Subscribe(gameObject, "LocalEvent", PrintName);
+        EventHandler.Execute(gameObject, "LocalEvent");
     }
 
     private void PrintHello()
     {
         Debug.Log("Hello");
+    }
+    
+    private void PrintName()
+    {
+        Debug.Log(name);
     }
 
     private void PrintMessage(string message, GameObject obj)
@@ -126,6 +134,8 @@ As a result, you will see in the console
 1) 0 GameObject
 
 You will not see "Hello" a second time because you are unsubscribing from this event in the code.
+ 
+Then you will see the names of the components as much as you have GameObjects with that component because, we are using "LocalEvent" to use the local Event system on the local object.
 
 ## <a id="rt-objectpool"></a>ObjectPool
 Tool to use Pooled GameObjects.
