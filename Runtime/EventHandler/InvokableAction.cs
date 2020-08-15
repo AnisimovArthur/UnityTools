@@ -6,7 +6,7 @@ namespace UnityTools
 
     internal class InvokableAction : InvokableActionBase
     {
-        private Action Action { get; set; }
+        internal Action Action { get; set; }
 
         internal bool IsActionEqual(Action action) => Action == action;
 
@@ -23,7 +23,7 @@ namespace UnityTools
 
     internal class InvokableAction<T1> : InvokableActionBase
     {
-        private Action<T1> Action { get; set; }
+        internal Action<T1> Action { get; set; }
 
         internal bool IsActionEqual(Action<T1> action) => Action == action;
 
@@ -40,7 +40,7 @@ namespace UnityTools
 
     internal class InvokableAction<T1, T2> : InvokableActionBase
     {
-        private Action<T1, T2> Action { get; set; }
+        internal Action<T1, T2> Action { get; set; }
 
         internal bool IsActionEqual(Action<T1, T2> action) => Action == action;
 
@@ -57,7 +57,7 @@ namespace UnityTools
 
     internal class InvokableAction<T1, T2, T3> : InvokableActionBase
     {
-        private Action<T1, T2, T3> Action { get; set; }
+        internal Action<T1, T2, T3> Action { get; set; }
 
         internal bool IsActionEqual(Action<T1, T2, T3> action) => Action == action;
 
@@ -74,7 +74,7 @@ namespace UnityTools
 
     internal class InvokableAction<T1, T2, T3, T4> : InvokableActionBase
     {
-        private Action<T1, T2, T3, T4> Action { get; set; }
+        internal Action<T1, T2, T3, T4> Action { get; set; }
 
         internal bool IsActionEqual(Action<T1, T2, T3, T4> action) => Action == action;
 
@@ -91,7 +91,7 @@ namespace UnityTools
 
     internal class InvokableAction<T1, T2, T3, T4, T5> : InvokableActionBase
     {
-        private Action<T1, T2, T3, T4, T5> Action { get; set; }
+        internal Action<T1, T2, T3, T4, T5> Action { get; set; }
 
         internal bool IsActionEqual(Action<T1, T2, T3, T4, T5> action) => Action == action;
 
@@ -108,7 +108,7 @@ namespace UnityTools
 
     internal class InvokableAction<T1, T2, T3, T4, T5, T6> : InvokableActionBase
     {
-        private Action<T1, T2, T3, T4, T5, T6> Action { get; set; }
+        internal Action<T1, T2, T3, T4, T5, T6> Action { get; set; }
 
         internal bool IsActionEqual(Action<T1, T2, T3, T4, T5, T6> action) => Action == action;
 
