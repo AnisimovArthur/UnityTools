@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -78,10 +78,13 @@ namespace UnityTools
             {
                 poolObject = Instantiate(original, position, rotation, parent);
             }
-
-            poolObject.transform.position = position;
-            poolObject.transform.rotation = rotation;
-            poolObject.transform.parent = parent;
+            else
+            {
+                poolObject.transform.position = position;
+                poolObject.transform.rotation = rotation;
+                poolObject.transform.SetParent(parent);
+                poolObject.SetActive(true);
+            }
 
             InstantiatedGameObjects.Add(poolObject.GetInstanceID(), originalInstanceID);
 
@@ -100,7 +103,6 @@ namespace UnityTools
                         continue;
                     }
 
-                    poolObject.SetActive(true);
                     return poolObject;
                 }
             }
