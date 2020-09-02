@@ -41,7 +41,7 @@ namespace UnityTools.Editor
             var icon = Resources.Load<Texture>($"{EditorResources.IconsPath}/ToolbarSceneLoader");
             Tool = new ToolbaPopup(menu, "Scenes", icon);
 
-            ToolbarTools.AddTool(Tool, ToolbarSide.Right);
+            ToolbarTools.AddTool(Tool, ToolbarSide.Left);
         }
 
         static ToolbarSceneLoader()
