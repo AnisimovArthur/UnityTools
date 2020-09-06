@@ -34,7 +34,7 @@ namespace UnityTools
         /// </summary>
         /// <param name="delay">Delay in seconds.</param>
         /// <param name="action">Action that occurs after the delay.</param>
-        /// <returns></returns>
+        /// <returns>Event that scheduled.</returns>
         public static ScheduledEvent Schedule(float delay, Action action)
         {
             if (Instance == null)
@@ -53,6 +53,16 @@ namespace UnityTools
             ScheduledEvents.Add(scheduledEvent);
             ScheduledEventsCount++;
             return scheduledEvent;
+        }
+
+        /// <summary>
+        /// Schedule a new event to occur in the next frame.
+        /// </summary>
+        /// <remarks>In Awake and first call OnEnable this will skip 2 frames.</remarks>
+        /// <param name="action">Action that occurs in the next frame.</param>
+        public static void SkipFrame(Action action)
+        {
+            Schedule(Mathf.Epsilon, action);
         }
 
         /// <summary>
@@ -106,6 +116,7 @@ namespace UnityTools
         }
 #endif
     }
+
 
     public class ScheduledEvent
     {
