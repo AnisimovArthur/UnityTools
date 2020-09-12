@@ -157,7 +157,7 @@ namespace UnityTools
         private void ReturnInternal(GameObject instantiatedObject, int originalInstanceID)
         {
             instantiatedObject.SetActive(false);
-            instantiatedObject.transform.parent = transform;
+            instantiatedObject.transform.SetParent(transform);
 
             if (GameObjectPool.TryGetValue(originalInstanceID, out Stack<GameObject> pool))
             {
