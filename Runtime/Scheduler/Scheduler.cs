@@ -77,6 +77,23 @@ namespace UnityTools
             Remove(scheduledEvent);
         }
 
+        /// <summary>
+        /// Reset the system. Removes all scheduled events and destroys instance.
+        /// </summary>
+        public static void Reset()
+        {
+            if (ScheduledEvents != null)
+                ScheduledEvents.Clear();
+
+            if (instance != null)
+            {
+                Destroy(instance.gameObject);
+                instance = null;
+            }
+
+            ScheduledEventsCount = 0;
+        }
+
         internal static void Remove(ScheduledEvent scheduledEvent)
         {
             ScheduledEventsCount--;
