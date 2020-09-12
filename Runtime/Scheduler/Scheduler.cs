@@ -80,7 +80,7 @@ namespace UnityTools
         /// <summary>
         /// Reset the system. Removes all scheduled events and destroys instance.
         /// </summary>
-        public static void Reset()
+        public static void Clear()
         {
             if (ScheduledEvents != null)
                 ScheduledEvents.Clear();
@@ -88,30 +88,56 @@ namespace UnityTools
             if (instance != null)
             {
                 Destroy(instance.gameObject);
-                instance = null;
             }
+
+            instance = null;
 
             ScheduledEventsCount = 0;
         }
 
         internal static void Remove(ScheduledEvent scheduledEvent)
         {
-            ScheduledEventsCount--;
-            ScheduledEvents.Remove(scheduledEvent);
+            if (ScheduledEvents.Contains(scheduledEvent))
+            {
+                ScheduledEventsCount--;
+                ScheduledEvents.Remove(scheduledEvent);
+            }
+            else
+            {
+                var errorMessage = $"[UnityTools.Scheduler] You are trying to remove a scheduled event, \n " +
+                    $"but there is no such scheduled event (already removed? forgot to make it null?).";
+
+                Delegate[] invocationList = scheduledEvent.Action.GetInvocationList();
+                errorMessage += $"\n Invocation actions of the scheduled event:";
+
+                if (invocationList.Length > 0)
+                {
+                    for (int i = 0; i < invocationList.Length; i++)
+                    {
+                        errorMessage += $"\n {invocationList[i].Target} - {invocationList[i].Method}";
+                    }
+                }
+                else
+                {
+                    errorMessage += $"\n no invocation actions.";
+                }
+
+                Debug.LogError(errorMessage); ;
+            }
         }
 
         private void Update()
         {
-            var count = ScheduledEventsCount;
+            int count = ScheduledEventsCount;
             for (int i = 0; i < count; i++)
             {
-                var scheduledEvent = ScheduledEvents[i];
+                ScheduledEvent scheduledEvent = ScheduledEvents[i];
                 if (scheduledEvent.EndTime <= Time.time)
                 {
-                    var prevCount = ScheduledEventsCount;
+                    int prevCount = ScheduledEventsCount;
                     scheduledEvent.Invoke();
 
-                    var diff = prevCount - ScheduledEventsCount;
+                    int diff = prevCount - ScheduledEventsCount;
                     count -= diff;
                     i = Mathf.Max(i - diff, 0);
                 }
