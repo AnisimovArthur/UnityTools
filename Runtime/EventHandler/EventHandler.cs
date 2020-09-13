@@ -117,6 +117,18 @@ namespace UnityTools
             CheckForEventRemoval(obj, eventName, actions);
         }
 
+        /// <summary>
+        /// Reset the system. Removes all events.
+        /// </summary>
+        public static void Clear()
+        {
+            if (GlobalEventTable != null)
+                GlobalEventTable.Clear();
+
+            if (EventTable != null)
+                EventTable.Clear();
+        }
+
         internal static void SubscribeInternal(string eventName, InvokableActionBase action)
         {
             if (GlobalEventTable.TryGetValue(eventName, out List<InvokableActionBase> actions))
