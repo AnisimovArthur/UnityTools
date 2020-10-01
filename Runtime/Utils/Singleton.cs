@@ -41,17 +41,17 @@ namespace UnityTools
             }
         }
 
-        private void Awake()
+        protected virtual void Awake()
         {
             ApplicationIsQuitting = false;
         }
 
-        private void OnApplicationQuit()
+        protected virtual void OnApplicationQuit()
         {
             ApplicationIsQuitting = true;
         }
 
-        public void OnDestroy()
+        protected virtual void OnDestroy()
         {
             ApplicationIsQuitting = true;
         }
