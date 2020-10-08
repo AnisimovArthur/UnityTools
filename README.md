@@ -47,7 +47,7 @@ The second option is to install via the manifest.
 
 To use the package you have to add the dependency to the project's Packages/manifest.json file.
 ```json
-"com.archie.unitytools": "https://github.com/AnisimovArthur/UnityTools.git#0.5-preview",
+"com.archie.unitytools": "https://github.com/AnisimovArthur/UnityTools.git#0.5.8-preview",
 ```
 
 ## <a id="gs-update"></a>Update package
@@ -55,8 +55,8 @@ To update the package you have to update the dependency version in the project's
 
 For example:
 
-Old: ```#0.0.2-preview``` 
-New: ```#0.1.1-preview```
+Old: ```#0.5.1-preview``` 
+New: ```#0.5.8-preview```
 
 # Runtime Tools
 ## <a id="rt-scheduler"></a>Scheduler
