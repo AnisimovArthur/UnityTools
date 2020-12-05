@@ -14,7 +14,8 @@ Unity package with Editor and Runtime tools.
    * [Scheduler](#rt-scheduler)
    * [Event Handler](#rt-eventhandler)
    * [ObjectPool](#rt-objectpool)
-   * Extensions
+   * [Extensions](#rt-extensions) 
+     * [PlayerPrefs](#rt-extensions-playerprefs)     
      * UI Extensions
      * Transform (RectTransform) Extensions   
    * [Utils](#rt-utils)      
@@ -28,6 +29,8 @@ Unity package with Editor and Runtime tools.
       * [Toolbar Label](#et-toolbar-label)
    * [Toolbar Scene Loader](#et-toolbarsceneloader)
    * [Inspector Button](#et-inspectorbutton)
+   * [Extensions](#et-extensions) 
+     * [EditorPrefs](#et-extensions-editorprefs)    
    
 # Getting Started
 
@@ -159,6 +162,22 @@ public class Example : MonoBehaviour
             ObjectPool.Return(pooledObjects[i]);
     }
 }
+```
+
+## <a id="rt-extensions"></a>Extensions
+### <a id="rt-extensions-playerprefs"></a>PlayerPrefs
+
+Using PlayerPrefsPro to save/get a value of custom types from PlayerPrefs.
+
+Supported types:
+
+```csharp
+using UnityTools;
+
+// Bool
+PlayerPrefsPro.GetBool("BoolKey");
+// System.DateTime
+PlayerPrefsPro.SetDateTime("DateTimeKey", System.DateTime.Now);
 ```
 
 ## <a id="rt-utils"></a>Utils
@@ -293,6 +312,22 @@ public class Example : MonoBehaviour
 **Note:** you have to use [**Platform dependent compilation**](https://docs.unity3d.com/Manual/PlatformDependentCompilation.html)  in order to have an Inspector Button in Runtime code.
 
 <img src="https://i.imgur.com/mhfZAEz.png" alt="alt text" width="527" height="432">
+
+## <a id="et-extensions"></a>Extensions
+### <a id="et-extensions-editorprefs"></a>EditorPrefs
+
+Using EditorPrefsPro to save/get a value of custom types from EditorPrefs.
+
+Supported types:
+
+```csharp
+using UnityTools.Editor;
+
+// Bool
+EditorPrefsPro.SetBool("BoolKey", true);
+// System.DateTime
+EditorPrefsPro.SetDateTime("DateTimeKey", System.DateTime.Now);
+```
 
 # License
 This package licensed under the [MIT license](https://github.com/AnisimovArthur/UnityTools/blob/master/LICENSE).
