@@ -13,7 +13,7 @@ Unity package with Editor and Runtime tools.
 ### Runtime Tools
    * [Scheduler](#rt-scheduler)
    * [Event Handler](#rt-eventhandler)
-   * [ObjectPool](#rt-objectpool)
+   * [Object Pool](#rt-objectpool)
    * [Extensions](#rt-extensions) 
      * [PlayerPrefs](#rt-extensions-playerprefs)     
      * UI Extensions
@@ -50,7 +50,7 @@ The second option is to install via the manifest.
 
 To use the package you have to add the dependency to the project's Packages/manifest.json file.
 ```json
-"com.archie.unitytools": "https://github.com/AnisimovArthur/UnityTools.git#0.5.8-preview",
+"com.archie.unitytools": "https://github.com/AnisimovArthur/UnityTools.git#0.6-preview",
 ```
 
 ## <a id="gs-update"></a>Update package
@@ -59,7 +59,7 @@ To update the package you have to update the dependency version in the project's
 For example:
 
 Old: ```#0.5.1-preview``` 
-New: ```#0.5.8-preview```
+New: ```#0.6-preview```
 
 # Runtime Tools
 ## <a id="rt-scheduler"></a>Scheduler
@@ -140,7 +140,7 @@ You will not see "Hello" a second time because you are unsubscribing from this e
  
 Then you will see the names of the components as much as you have GameObjects with that component because, we are using "LocalEvent" to use the local Event system on the local object.
 
-## <a id="rt-objectpool"></a>ObjectPool
+## <a id="rt-objectpool"></a>Object Pool
 Tool to use Pooled GameObjects.
 
 ```csharp
