@@ -15,6 +15,7 @@ Unity package with Editor and Runtime tools.
    * [Event Handler](#rt-eventhandler)
    * [Object Pool](#rt-objectpool)
    * [Extensions](#rt-extensions) 
+     * [GizmosPro](#rt-extensions-gizmospro)   
      * [PlayerPrefs](#rt-extensions-playerprefs)     
      * UI Extensions
      * Transform (RectTransform) Extensions   
@@ -29,8 +30,7 @@ Unity package with Editor and Runtime tools.
       * [Toolbar Label](#et-toolbar-label)
    * [Toolbar Scene Loader](#et-toolbarsceneloader)
    * [Inspector Button](#et-inspectorbutton)
-   * [Extensions](#et-extensions) 
-     * [GizmosPro](#et-extensions-gizmospro)   
+   * [Extensions](#et-extensions)      
      * [EditorPrefs](#et-extensions-editorprefs)    
    
 # Getting Started
@@ -166,6 +166,23 @@ public class Example : MonoBehaviour
 ```
 
 ## <a id="rt-extensions"></a>Extensions
+### <a id="rt-extensions-gizmospro"></a>GizmosPro
+
+Extra gizmos for default UnityEngine.Gizmos.
+
+```csharp
+using UnityEngine;
+using UnityTools;
+
+private void OnDrawGizmos()
+{
+    GizmosPro.DrawWireCylinder(transform.position, transform.up, 2.5f, 5, Color.green);
+    GizmosPro.DrawWireCircle(transform.position, transform.up, 2.5f, Color.red);
+}
+
+```
+<img src="https://i.imgur.com/C5TplrJ.png" alt="alt text" width="457" height="255">
+
 ### <a id="rt-extensions-playerprefs"></a>PlayerPrefs
 
 Using PlayerPrefsPro to save/get a value of custom types from PlayerPrefs.
@@ -175,7 +192,7 @@ Supported types:
 ```csharp
 using UnityTools;
 
-// Bool
+// Boolean
 PlayerPrefsPro.GetBool("BoolKey");
 // System.DateTime
 PlayerPrefsPro.SetDateTime("DateTimeKey", System.DateTime.Now);
@@ -329,22 +346,6 @@ EditorPrefsPro.SetBool("BoolKey", true);
 // System.DateTime
 EditorPrefsPro.SetDateTime("DateTimeKey", System.DateTime.Now);
 ```
-### <a id="et-extensions-gizmospro"></a>GizmosPro
-
-Extra gizmo for default UnityEngine.Gizmos.
-
-```csharp
-using UnityEngine;
-using UnityTools;
-
-private void OnDrawGizmos()
-{
-    GizmosPro.DrawWireCylinder(transform.position, transform.up, 2.5f, 5, Color.green);
-    GizmosPro.DrawWireCircle(transform.position, transform.up, 2.5f, Color.red);
-}
-
-```
-<img src="https://i.imgur.com/C5TplrJ.png" alt="alt text" width="457" height="255">
 
 # License
 This package licensed under the [MIT license](https://github.com/AnisimovArthur/UnityTools/blob/master/LICENSE).
