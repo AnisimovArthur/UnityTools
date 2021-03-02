@@ -30,6 +30,7 @@ Unity package with Editor and Runtime tools.
    * [Toolbar Scene Loader](#et-toolbarsceneloader)
    * [Inspector Button](#et-inspectorbutton)
    * [Extensions](#et-extensions) 
+     * [GizmosPro](#et-extensions-gizmospro)   
      * [EditorPrefs](#et-extensions-editorprefs)    
    
 # Getting Started
@@ -214,7 +215,7 @@ public class ToolbarExample
 }
 ```
 
-<img src="https://i.imgur.com/NZ54FqH.png" alt="alt text" width="478" height="82">
+<img src="https://i.imgur.com/NZ54FqH.png" width="478" height="82">
 
 ###  <a id="et-toolbar-button"></a>Toolbar Button
 
@@ -267,7 +268,7 @@ static ToolbarExample()
 
 This tool is developed by [Toolbar](#et-toolbar) functionality. You can easily add quick access to your scenes.
 
-<img src="https://i.imgur.com/TtWOWmH.png" alt="alt text" width="451" height="155">
+<img src="https://i.imgur.com/TtWOWmH.png" width="451" height="155">
 
 ```csharp
 using UnityEditor;
@@ -311,7 +312,7 @@ public class Example : MonoBehaviour
 
 **Note:** you have to use [**Platform dependent compilation**](https://docs.unity3d.com/Manual/PlatformDependentCompilation.html)  in order to have an Inspector Button in Runtime code.
 
-<img src="https://i.imgur.com/mhfZAEz.png" alt="alt text" width="527" height="432">
+<img src="https://i.imgur.com/mhfZAEz.png" width="527" height="432">
 
 ## <a id="et-extensions"></a>Extensions
 ### <a id="et-extensions-editorprefs"></a>EditorPrefs
@@ -328,6 +329,22 @@ EditorPrefsPro.SetBool("BoolKey", true);
 // System.DateTime
 EditorPrefsPro.SetDateTime("DateTimeKey", System.DateTime.Now);
 ```
+### <a id="et-extensions-gizmospro"></a>GizmosPro
+
+Extra gizmo for default UnityEngine.Gizmos.
+
+```csharp
+using UnityEngine;
+using UnityTools;
+
+private void OnDrawGizmos()
+{
+    GizmosPro.DrawWireCylinder(transform.position, transform.up, 2.5f, 5, Color.green);
+    GizmosPro.DrawWireCircle(transform.position, transform.up, 2.5f, Color.red);
+}
+
+```
+<img src="https://i.imgur.com/C5TplrJ.png" alt="alt text" width="457" height="255">
 
 # License
 This package licensed under the [MIT license](https://github.com/AnisimovArthur/UnityTools/blob/master/LICENSE).
