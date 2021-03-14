@@ -4,7 +4,6 @@ namespace UnityTools
 {
     /// <summary>
     /// Singleton pattern.
-    /// There is currently no compatibility with the new Enter Play Mode system.
     /// </summary>
     /// <typeparam name="T">Type of singleton.</typeparam>
     public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
@@ -12,7 +11,7 @@ namespace UnityTools
         private static readonly object Lock = new object();
         protected static bool ApplicationIsQuitting { get; set; } = false;
 
-        private static T instance;
+        protected static T instance;
         public static T Instance
         {
             get

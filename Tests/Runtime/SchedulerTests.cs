@@ -25,7 +25,7 @@ namespace UnityTools.Tests.Runtime
 
             var schedule = Scheduler.Schedule(ScheduleTime, () => Change(false));
             schedule.Cancel();
-            Scheduler.Cancel(schedule);
+
             yield return new WaitForSeconds(WaitTime);
             Assert.AreEqual(Result, true);
         }
