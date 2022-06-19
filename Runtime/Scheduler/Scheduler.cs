@@ -163,8 +163,9 @@ namespace UnityTools
 
     public class ScheduledEvent
     {
+        public float EndTime { get; private set; }
+
         internal Action Action { get; private set; }
-        internal float EndTime { get; private set; }
 
         internal ScheduledEvent(float delay, Action action)
         {
@@ -181,6 +182,18 @@ namespace UnityTools
         public void Cancel()
         {
             Scheduler.Cancel(this);
+        }
+
+        public float GetRemainingTime()
+        {
+            float time = Time.time;
+
+            if (time > EndTime)
+            {
+                return 0;
+            }
+
+            return EndTime - time;
         }
     }
 }
