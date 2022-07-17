@@ -164,12 +164,14 @@ namespace UnityTools
     public class ScheduledEvent
     {
         public float EndTime { get; private set; }
+        public float Delay { get; private set; }
 
         internal Action Action { get; private set; }
 
         internal ScheduledEvent(float delay, Action action)
         {
-            EndTime = Time.time + delay;
+            Delay = delay;
+            EndTime = Time.time + Delay;
             Action = action;
         }
 
