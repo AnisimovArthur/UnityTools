@@ -186,6 +186,11 @@ namespace UnityTools
             Scheduler.Cancel(this);
         }
 
+        public float GetProgress()
+        {
+            return (Delay - GetRemainingTime()) / Delay;
+        }
+
         public float GetRemainingTime()
         {
             float time = Time.time;
