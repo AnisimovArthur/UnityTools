@@ -171,6 +171,36 @@ namespace UnityTools
             }
         }
 
+        /// <summary>
+        /// Preload preafabs manually.
+        /// </summary>
+        /// <param name="prefabsToPreload">Prefabs to preload</param>
+        public static void PreloadPrefabs(PreloadedPrefab[] prefabsToPreload)
+        {
+            if (prefabsToPreload != null && prefabsToPreload.Length > 0)
+            {
+                var instantiatedObjects = new List<GameObject>();
+
+                for (int i = 0; i < prefabsToPreload.Length; i++)
+                {
+                    if (prefabsToPreload[i].Prefab == null || prefabsToPreload[i].Count == 0)
+                    {
+                        continue;
+                    }
+
+                    for (int j = 0; j < prefabsToPreload[i].Count; j++)
+                    {
+                        instantiatedObjects.Add(Get(prefabsToPreload[i].Prefab));
+                    }
+
+                    for (int j = 0; j < prefabsToPreload[i].Count; j++)
+                    {
+                        Return(instantiatedObjects[j]);
+                    }
+                }
+            }
+        }
+
         private void SceneUnloaded(Scene scene)
         {
             IsInitialized = false;
@@ -182,27 +212,8 @@ namespace UnityTools
         {
             if (PreloadedPrefabs != null && PreloadedPrefabs.Length > 0)
             {
-                var instantiatedObjects = new List<GameObject>();
-
-                for (int i = 0; i < PreloadedPrefabs.Length; i++)
-                {
-                    if (PreloadedPrefabs[i].Prefab == null || PreloadedPrefabs[i].Count == 0)
-                    {
-                        continue;
-                    }
-
-                    for (int j = 0; j < PreloadedPrefabs[i].Count; j++)
-                    {
-                        instantiatedObjects.Add(Get(PreloadedPrefabs[i].Prefab));
-                    }
-
-                    for (int j = 0; j < PreloadedPrefabs[i].Count; j++)
-                    {
-                        Return(instantiatedObjects[j]);
-                    }
-                }
+                PreloadPrefabs(PreloadedPrefabs);
             }
-
         }
 
         private void OnEnable()
