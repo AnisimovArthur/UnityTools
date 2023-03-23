@@ -23,12 +23,13 @@ namespace UnityTools
         }
 
         [Tooltip("Objects to be instantiated on scene load.")]
-        [SerializeField] protected PreloadedPrefab[] preloadedPrefabs;
+        [SerializeField] protected PreloadedPrefab[] m_PreloadedPrefabs;
+        [SerializeField] protected bool m_DontDestroyOnLoad;
 
         /// <summary>
         /// Objects to be instantiated on scene load.
         /// </summary>
-        public PreloadedPrefab[] PreloadedPrefabs { get => preloadedPrefabs; }
+        public PreloadedPrefab[] PreloadedPrefabs { get => m_PreloadedPrefabs; }
 
         private Dictionary<int, Stack<GameObject>> GameObjectPool { get; set; } = new Dictionary<int, Stack<GameObject>>();
         private Dictionary<int, int> InstantiatedGameObjects { get; set; } = new Dictionary<int, int>();
@@ -199,6 +200,11 @@ namespace UnityTools
                     }
                 }
             }
+        }
+
+        public static void MarkAsDontDestroyOnLoad()
+        {
+            DontDestroyOnLoad(Instance);
         }
 
         private void SceneUnloaded(Scene scene)
