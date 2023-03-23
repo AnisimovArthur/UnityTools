@@ -179,14 +179,14 @@ namespace UnityTools
         {
             if (prefabsToPreload != null && prefabsToPreload.Length > 0)
             {
-                var instantiatedObjects = new List<GameObject>();
-
                 for (int i = 0; i < prefabsToPreload.Length; i++)
                 {
                     if (prefabsToPreload[i].Prefab == null || prefabsToPreload[i].Count == 0)
                     {
                         continue;
                     }
+
+                    var instantiatedObjects = new List<GameObject>();
 
                     for (int j = 0; j < prefabsToPreload[i].Count; j++)
                     {
