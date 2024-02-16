@@ -1,8 +1,6 @@
 # Summary
 Unity package with Editor and Runtime tools.
 
-**Note:** this package in preview version. Feel free to use Issues and Pull requests to contribute.
-
 # Table of contents
 
 ### Getting started
