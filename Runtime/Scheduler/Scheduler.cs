@@ -49,7 +49,7 @@ namespace UnityTools
                 return null;
             }
 
-            var scheduledEvent = new ScheduledEvent(delay, action);
+            var scheduledEvent = new ScheduledEvent(delay, Time.frameCount, action);
             ScheduledEvents.Add(scheduledEvent);
             ScheduledEventsCount++;
             return scheduledEvent;
@@ -132,6 +132,12 @@ namespace UnityTools
             for (int i = 0; i < count; i++)
             {
                 ScheduledEvent scheduledEvent = ScheduledEvents[i];
+
+                if (Time.frameCount == scheduledEvent.ScheduleFrame)
+                {
+                    continue;
+                }
+
                 if (scheduledEvent.EndTime <= Time.time)
                 {
                     int prevCount = ScheduledEventsCount;
@@ -165,13 +171,15 @@ namespace UnityTools
     {
         public float EndTime { get; private set; }
         public float Delay { get; private set; }
+        public int ScheduleFrame { get; private set; }
 
         internal Action Action { get; private set; }
 
-        internal ScheduledEvent(float delay, Action action)
+        internal ScheduledEvent(float delay, int frame, Action action)
         {
             Delay = delay;
             EndTime = Time.time + Delay;
+            ScheduleFrame = frame;
             Action = action;
         }
 

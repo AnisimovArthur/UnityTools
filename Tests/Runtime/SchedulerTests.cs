@@ -1,9 +1,9 @@
 ﻿using System.Collections;
 
+using NUnit.Framework;
+
 using UnityEngine;
 using UnityEngine.TestTools;
-
-using NUnit.Framework;
 
 namespace UnityTools.Tests.Runtime
 {
@@ -28,6 +28,11 @@ namespace UnityTools.Tests.Runtime
 
             yield return new WaitForSeconds(WaitTime);
             Assert.AreEqual(Result, true);
+
+            Scheduler.SkipFrame(() => Change(false));
+            Assert.AreEqual(Result, true);
+            yield return null;
+            Assert.AreEqual(Result, false);
         }
 
         private void Change(bool value)
