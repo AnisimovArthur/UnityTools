@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+
+using UnityEngine;
 
 namespace UnityTools
 {
@@ -49,6 +51,44 @@ namespace UnityTools
             while (parent.childCount > 0)
             {
                 Object.DestroyImmediate(parent.GetChild(0).gameObject);
+            }
+        }
+
+        /// <summary>
+        /// Safely removes all children without using DestroyImmediate (safe during physics events).
+        /// </summary>
+        /// <param name="parent"></param>
+        public static void DestroyChildrenImmediateCollisionSafe(this Transform parent)
+        {
+            var children = new List<GameObject>();
+            foreach (Transform child in parent)
+            {
+                children.Add(child.gameObject);
+            }
+
+            foreach (var child in children)
+            {
+                Object.Destroy(child);
+                child.transform.SetParent(null);
+            }
+        }
+
+        /// <summary>
+        /// Safely removes all children without using DestroyImmediate (safe during physics events).
+        /// </summary>
+        /// <param name="parent"></param>
+        public static void DestroyChildrenImmediateCollisionSafe(this RectTransform parent)
+        {
+            var children = new List<GameObject>();
+            foreach (RectTransform child in parent)
+            {
+                children.Add(child.gameObject);
+            }
+
+            foreach (var child in children)
+            {
+                Object.Destroy(child);
+                child.transform.SetParent(null);
             }
         }
     }
