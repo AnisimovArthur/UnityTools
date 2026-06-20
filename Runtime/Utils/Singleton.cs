@@ -25,7 +25,7 @@ namespace UnityTools
                 {
                     if (instance == null)
                     {
-                        instance = FindObjectOfType<T>();
+                        instance = FindAnyObjectByType<T>();
 
                         if (instance == null)
                         {

@@ -31,8 +31,8 @@ namespace UnityTools
         /// </summary>
         public PreloadedPrefab[] PreloadedPrefabs { get => m_PreloadedPrefabs; }
 
-        private Dictionary<int, Stack<GameObject>> GameObjectPool { get; set; } = new Dictionary<int, Stack<GameObject>>();
-        private Dictionary<int, int> InstantiatedGameObjects { get; set; } = new Dictionary<int, int>();
+        private Dictionary<EntityId, Stack<GameObject>> GameObjectPool { get; set; } = new Dictionary<EntityId, Stack<GameObject>>();
+        private Dictionary<EntityId, EntityId> InstantiatedGameObjects { get; set; } = new Dictionary<EntityId, EntityId>();
         private static bool IsInitialized { get; set; }
 
         /// <summary>
@@ -72,8 +72,8 @@ namespace UnityTools
 
         private GameObject GetInternal(GameObject original, Vector3 position, Quaternion rotation, Transform parent)
         {
-            var originalInstanceID = original.GetInstanceID();
-            var poolObject = GetExistObject(originalInstanceID);
+            var originalEntityId = original.GetEntityId();
+            var poolObject = GetExistObject(originalEntityId);
 
             if (poolObject == null)
             {
@@ -87,14 +87,14 @@ namespace UnityTools
                 poolObject.SetActive(true);
             }
 
-            InstantiatedGameObjects.Add(poolObject.GetInstanceID(), originalInstanceID);
+            InstantiatedGameObjects.Add(poolObject.GetEntityId(), originalEntityId);
 
             return poolObject;
         }
 
-        private GameObject GetExistObject(int originalInstanceID)
+        private GameObject GetExistObject(EntityId originalEntityId)
         {
-            if (GameObjectPool.TryGetValue(originalInstanceID, out Stack<GameObject> pool))
+            if (GameObjectPool.TryGetValue(originalEntityId, out Stack<GameObject> pool))
             {
                 while (pool.Count > 0)
                 {
@@ -123,7 +123,7 @@ namespace UnityTools
 
         private bool IsPoolObjectInternal(GameObject instantiatedObject)
         {
-            return InstantiatedGameObjects.ContainsKey(instantiatedObject.GetInstanceID());
+            return InstantiatedGameObjects.ContainsKey(instantiatedObject.GetEntityId());
         }
 
         /// <summary>
@@ -142,25 +142,25 @@ namespace UnityTools
 
         private void ReturnInternal(GameObject instantiatedObject)
         {
-            var instantiatedInstanceID = instantiatedObject.GetInstanceID();
+            var instantiatedEntityId = instantiatedObject.GetEntityId();
 
-            if (!InstantiatedGameObjects.TryGetValue(instantiatedInstanceID, out int originalInstanceID))
+            if (!InstantiatedGameObjects.TryGetValue(instantiatedEntityId, out var originalEntityId))
             {
                 Debug.LogError($"{instantiatedObject} is not a Pool Object. To use PoolObject you have to Instantiate object via ObjectPool.Get");
                 return;
             }
 
-            InstantiatedGameObjects.Remove(instantiatedInstanceID);
+            InstantiatedGameObjects.Remove(instantiatedEntityId);
 
-            ReturnInternal(instantiatedObject, originalInstanceID);
+            ReturnInternal(instantiatedObject, originalEntityId);
         }
 
-        private void ReturnInternal(GameObject instantiatedObject, int originalInstanceID)
+        private void ReturnInternal(GameObject instantiatedObject, EntityId originalEntityId)
         {
             instantiatedObject.SetActive(false);
             instantiatedObject.transform.SetParent(transform);
 
-            if (GameObjectPool.TryGetValue(originalInstanceID, out Stack<GameObject> pool))
+            if (GameObjectPool.TryGetValue(originalEntityId, out Stack<GameObject> pool))
             {
                 pool.Push(instantiatedObject);
             }
@@ -168,7 +168,7 @@ namespace UnityTools
             {
                 pool = new Stack<GameObject>();
                 pool.Push(instantiatedObject);
-                GameObjectPool.Add(originalInstanceID, pool);
+                GameObjectPool.Add(originalEntityId, pool);
             }
         }
 
